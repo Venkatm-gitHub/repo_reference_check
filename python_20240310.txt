@@ -1,0 +1,32 @@
+from tableauhyperapi import HyperProcess, Connection, Telemetry, TableName
+
+def get_hyper_schema(file_path):
+    schema = {}
+
+    with HyperProcess(telemetry=Telemetry.SEND_USAGE_DATA_TO_TABLEAU) as hyper:
+        with Connection(endpoint=hyper.endpoint, database=file_path) as connection:
+            catalog = connection.catalog
+
+            for table_name in catalog.get_table_names():
+                table_definition = catalog.get_table_definition(table_name)
+                columns = {}
+
+                for column in table_definition.columns:
+                    columns[column.name] = str(column.type)
+
+                schema[table_name.name] = columns
+
+    return schema
+
+def main():
+    file_path = "path/to/your/hyper/file.hyper"
+    schema = get_hyper_schema(file_path)
+
+    print("Table and Column Information:")
+    for table_name, columns in schema.items():
+        print(f"\nTable: {table_name}")
+        for column_name, data_type in columns.items():
+            print(f"  - {column_name}: {data_type}")
+
+if __name__ == "__main__":
+    main()
