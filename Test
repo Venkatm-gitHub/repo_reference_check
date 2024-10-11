@@ -1,0 +1,20 @@
+import tableauhyperapi as tabhyper
+
+# Connect to the Tableau Hyper file
+with tabhyper.connection.Connection("path/to/your/tableau_hyper_file.hyper") as connection:
+
+    # Get a table object
+    table = connection.catalog.get_table("your_table_name")
+
+    # Create a new column definition
+    new_column_definition = tabhyper.table.ColumnDefinition(
+        name="new_column_name",
+        type=tabhyper.types.Type.STRING,  # Adjust the type as needed
+        formula="CONCAT('prefix_', [column_name])"  # Replace with your desired formula
+    )
+
+    # Add the new column to the table
+    table.add_column(new_column_definition)
+
+    # Write the changes back to the file
+    connection.catalog.alter_table(table)
