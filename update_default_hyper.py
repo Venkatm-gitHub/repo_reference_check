@@ -1,7 +1,7 @@
 from tableauhyperapi import HyperProcess, Connection, Telemetry, CreateMode, TableName
 
 # Specify your Hyper file path and the default value
-HYPER_FILE = r'D:\work\citi\Tableau\community supported\test_file_prep\trg\defaulting\dim_geo.hyper'
+HYPER_FILE = r'D:\work\q\Tableau\community supported\test_file_prep\trg\defaulting\dim_geo.hyper'
 DEFAULT_VALUE = '0'  # Change this to your desired default value
 
 # Start the Hyper process
