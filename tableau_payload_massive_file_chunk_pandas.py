@@ -1,6 +1,83 @@
 import uuid
 import tableauserverclient as TSC
 from pathlib import Path
+from tableauhyperapi import HyperProcess, Connection, TableName
+
+def get_table_names(hyper_file_path):
+    with HyperProcess() as hyper:
+        with Connection(hyper.endpoint, hyper_file_path) as connection:
+            return [table.table_name for table in connection.catalog.get_table_names()]
+
+def main():
+    base_hyper_path = Path("/var/app/ctp/sit2/tbfw/dlepoc/merged/output")
+    base_hyper_name = "tpmt dsnt herged perf test"
+    
+    ENV = "SIT2"
+    PUBLISH_CONFIGURATION = {
+        'DEV': {'site': 'DEV', 'project': 'Data Sources'}
+    }[ENV]
+    TABLEAU_SERVER = "https://XX.tableau.XX.net"
+
+    try:
+        server = TSC.Server(TABLEAU_SERVER, use_server_version=False)
+        server.version = '3.13'
+        server.add_http_options({'verify': False})
+        site = PUBLISH_CONFIGURATION['site']
+        tableau_auth = TSC.TableauAuth("user_name", "welcome", site_id=site)
+
+        with server.auth.sign_in(tableau_auth):
+            datasources, _ = server.datasources.get()
+            datasource_id = next((ds.id for ds in datasources if ds.name == base_hyper_name), None)
+
+            if datasource_id is None:
+                raise ValueError(f"Datasource {base_hyper_name} not found.")
+
+            # Get all split Hyper files
+            split_hyper_files = list(base_hyper_path.glob(f"{base_hyper_name}*.hyper"))
+            split_hyper_files.sort()  # Ensure files are processed in order
+
+            for file_index, hyper_file in enumerate(split_hyper_files):
+                print(f"Processing file: {hyper_file.name}")
+                
+                table_names = get_table_names(hyper_file)
+
+                for table_name in table_names:
+                    print(f"Processing table: {table_name}")
+
+                    request_id = str(uuid.uuid4())
+
+                    insert_actions = [{
+                        "action": "insert" if file_index > 0 or table_names.index(table_name) > 0 else "replace",
+                        "source-table": table_name,
+                        "target-table": table_name
+                    }]
+
+                    job = server.datasources.update_hyper_data(
+                        datasource_id,
+                        request_id=request_idc,
+                        actions=insert_actions,
+                        payload=str(hyper_file)
+                    )
+                    print(f"File {hyper_file.name}, Table {table_name} - Update job posted (ID: {job.id})")
+                    job = server.jobs.wait_for_job(job)
+                    print(f"File {hyper_file.name}, Table {table_name} - Job finished successfully")
+
+                print(f"Finished processing file: {hyper_file.name}")
+
+        print("All files and tables processed successfully")
+
+    except Exception as e:
+        print(f'ERROR: {e}')
+        raise e
+
+if __name__ == "__main__":
+    main()
+
+
+'''
+import uuid
+import tableauserverclient as TSC
+from pathlib import Path
 from tableauhyperapi import HyperProcess, Connection, SqlType, TableDefinition, Inserter, CreateMode, TableName
 
 CHUNK_SIZE = 100000  # Adjust this value based on your specific performance needs
@@ -99,3 +176,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+'''
