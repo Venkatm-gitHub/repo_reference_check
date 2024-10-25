@@ -1,0 +1,24 @@
+---
+config:
+  look: classic
+  theme: forest
+  layout: fixed
+---
+flowchart LR
+    A["Start"] --> B["Obtain the list of input hyper files"]
+    B --> C["Obtain primary key and foreign key for each table"]
+    C --> D["For each input hyper file"]
+    D --> D1["Create a connection"] & E["Prepare merged hyper file"]
+    D1 --> D2["Get schema name"]
+    D2 --> D3["Get table name in the schema"]
+    D3 --> D4["Get existing table definition"]
+    D4 --> D5["For each column in the table definition"]
+    D5 --> D51["Get existing column name, data type, and nullability. If column is a PK, deem it non-nullable"] & D52["Else, copy the existing column name, data type, and nullability"]
+    D51 --> D52
+    D52 --> D6["Prepare output table definition"]
+    D6 --> D7["If table is a fact table, alter to add FK"]
+    D7 --> D8["Prepare insert statement to insert data from source to target with where clause having PK not equal to nullability"]
+    D8 --> D9["If insert fails, exit the group"]
+    D9 --> D
+    E --> F["Publish the merged hyper file"]
+    F --> G["End"]
