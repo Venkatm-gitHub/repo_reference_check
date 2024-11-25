@@ -1,0 +1,19 @@
+According to Python's PEP 8 guidelines, the naming conventions for classes, functions, methods, and variable names follow certain rules:
+
+Numbers in Names:
+
+You can use numbers in class, function, method, and variable names. However, they cannot start with a number. For example, my_variable1 is valid, but 1st_variable is not.
+Special Characters:
+
+In Python, variable names (including class, function, and method names) can only include letters (a-z, A-Z), numbers (0-9), and underscores (_). Special characters like $, @, %, etc., are not allowed in variable names.
+Starting with Numbers or Special Characters:
+
+Names cannot start with a number. For example, 2nd_variable is invalid.
+Names cannot start with special characters either. The only valid character to start a name is a letter or an underscore. For example, _my_variable is valid, but $my_variable is not.
+Summary of Valid Naming:
+Valid: my_variable, variable1, _my_var
+Invalid: 1st_variable, $my_variable, @variable
+These rules help maintain readability and consistency in Python code, which is a core principle of PEP 8.
+
+
+
