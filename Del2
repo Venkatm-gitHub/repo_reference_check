@@ -1,0 +1,91 @@
+def calculate_area(length, width):
+    area = length * width
+    return area
+
+# Main program
+length = 10
+width = 5
+result = calculate_area(length, width)
+print("Area:", result)
+
+
+def calculate_area(length, width):
+    """Calculates the area of a rectangle.
+
+    Args:
+        length: The length of the rectangle.
+        width: The width of the rectangle.
+
+    Returns:
+        The area of the rectangle.
+    """
+
+    # Calculate the area by multiplying length and width
+    area = length * width
+    return area
+
+# Main program
+length = 10  # Input length
+width = 5   # Input width
+
+# Calculate the area using the function
+result = calculate_area(length, width)
+
+# Print the calculated area
+print("Area:", result)
+
+
+Bad Approach: Minimal Comments
+def calculate_area(length, width):
+    area = length * width
+    return area
+
+# Main program
+length = 10
+width = 5
+result = calculate_area(length, width)
+print("Area:", result)
+
+Good Approach: Explanatory Comments
+def calculate_area(length, width):
+    """Calculates the area of a rectangle.
+
+    Args:
+        length: The length of the rectangle.
+        width: The width of the rectangle.
+
+    Returns:
+        The area of the rectangle.
+    """
+
+    # Calculate the area by multiplying length and width
+    area = length * width
+    return area
+
+# Main program
+length = 10  # Input length
+width = 5   # Input width
+
+# Calculate the area using the function
+result = calculate_area(length, width)
+
+# Print the calculated area
+print("Area:", result)
+
+Explanation of the Good Approach:
+ * Docstring: Provides a clear overview of the function's purpose, parameters, and return value.
+ * Inline Comment: Used sparingly to explain a specific, non-obvious calculation or logic.
+ * Descriptive Variable Names: Make the code more readable without excessive comments.
+ * Clear Function and Variable Naming: Choose names that accurately reflect their purpose.
+Additional Tips for Effective Commenting:
+ * Avoid Redundant Comments: Don't repeat what the code already says clearly.
+ * Use Clear and Concise Language: Write comments in plain English, avoiding jargon.
+ * Update Comments as Code Changes: Ensure comments always accurately reflect the code.
+ * Use Consistent Formatting: Maintain a consistent style for comments.
+ * Consider Your Audience: Tailor comments to the specific reader (e.g., other developers, future self).
+By following these guidelines, you can write code that is not only functional but also easy to understand and maintain.
+ * https://github.com/MylavarapuSaketh/Saketh_INFO5731_Fall2023
+
+
+
+
