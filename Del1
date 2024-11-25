@@ -1,0 +1,75 @@
+# This function calculates the factorial of a non-negative integer.
+# The factorial of a non-negative integer n, denoted by n!, is the product of all positive integers less than or equal to n.
+# For example, 5! = 5 * 4 * 3 * 2 * 1 = 120.
+def factorial(n):
+    """Calculates the factorial of a non-negative integer.
+
+    Args:
+        n: The non-negative integer to calculate the factorial of.
+
+    Returns:
+        The factorial of n.
+
+    Raises:
+        ValueError: If n is negative.
+    """
+
+    if n < 0:
+        raise ValueError("n must be non-negative")
+    elif n == 0:
+        return 1  # Base case: 0! = 1
+    else:
+        # Recursive case: n! = n * (n-1)!
+        return n * factorial(n - 1)
+
+# This code calculates the factorial of 5 and prints the result.
+result = factorial(5)
+print(f"The factorial of 5 is {result}")
+
+
+
+# This function calculates the factorial of a non-negative integer.
+# The factorial of a non-negative integer n, denoted by n!, is the product of all positive integers less than or equal to n.
+# For example, 5! = 5 * 4 * 3 * 2 * 1 = 120.
+def factorial(n):
+    """Calculates the factorial of a non-negative integer.
+
+    Args:
+        n: The non-negative integer to calculate the factorial of.
+
+    Returns:
+        The factorial of n.
+
+    Raises:
+        ValueError: If n is negative.
+    """
+
+    if n < 0:
+        raise ValueError("n must be non-negative")
+    elif n == 0:
+        return 1  # Base case: 0! = 1
+    else:
+        # Recursive case: n! = n * (n-1)!
+        return n * factorial(n - 1)
+
+# This code calculates the factorial of 5 and prints the result.
+result = factorial(5)
+print(f"The factorial of 5 is {result}")
+
+Explanation of the comments:
+ * Function comment: This comment explains the purpose of the function, its inputs, outputs, and potential exceptions.
+ * Inline comment: This comment explains why we're returning 1 for the base case n == 0.
+ * Recursive case comment: This comment explains the recursive relationship between n! and (n-1)!.
+ * Code execution comment: This comment explains what the code is doing, i.e., calculating the factorial of 5 and printing the result.
+Additional tips for writing good comments:
+ * Be concise and clear: Avoid writing long, rambling comments. Get to the point and use simple language.
+ * Use proper grammar and spelling: This makes your comments easier to read and understand.
+ * Update comments as needed: If you change the code, make sure to update the comments as well.
+ * Use comments to explain complex logic: If a piece of code is difficult to understand, use a comment to explain the logic behind it.
+ * Avoid using comments to explain obvious code: Don't comment every line of code. Only comment the parts that are not self-explanatory.
+ * Use a consistent style: This makes your code more readable and maintainable.
+By following these guidelines, you can write comments that are helpful and informative.
+ * https://github.com/Bigfoot71/NEXUS
+ * https://www.nivas.hr/blog/2017/08/02/recursions-and-php/
+ * https://github.com/Viekesh/PythonsPlayground
+
