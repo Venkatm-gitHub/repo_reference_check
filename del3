@@ -1,0 +1,27 @@
+
+Positive Test Cases
+Valid Port Number in Configuration
+Input: prod.env.yaml contains a valid port number (e.g., 8080).
+Expected Outcome: The application successfully reads the port number and starts the REST API service on port 8080.
+Port Available for Use
+Input: The fetched port (e.g., 8080) is not in use by any process.
+Expected Outcome: The application starts the REST API service on the fetched port without any modifications.
+Port Conflict Resolved with Increment
+Input: The fetched port (e.g., 8080) is in use.
+Expected Outcome: The application resets the port to 58900 and increments it to 58901, then starts the service successfully.
+Maximum Dynamic Port Increment Attempt
+Input: The fetched port is in use, and the first five ports (58900 to 58904) are also in use.
+Expected Outcome: The application attempts to increment the port up to 58905 and successfully starts the service on this new port.
+Negative Test Cases
+Invalid Port Number in Configuration
+Input: prod.env.yaml contains an invalid port number (e.g., 70000).
+Expected Outcome: The application throws an error indicating that the port number is out of range (valid range: 1-65535).
+Port Conflict with All Incremented Ports in Use
+Input: The fetched port (e.g., 8080) is in use, and all ports from 58900 to 58990 are also occupied.
+Expected Outcome: The application fails to start the REST API service and returns an error indicating that no available ports could be found after five attempts.
+Error Handling for Failed Port Fetch
+Input: The application encounters an error while reading prod.env.yaml (e.g., file not found).
+Expected Outcome: The application logs an error message and fails to start, indicating that it could not read the configuration file.
+Service Start Failure Due to Port Already in Use
+Input: The fetched port (e.g., 8080) is occupied by another process.
+Expected Outcome: After attempting to reset and increment, if all designated ports are busy, the service fails to start, logging appropriate error messages.
